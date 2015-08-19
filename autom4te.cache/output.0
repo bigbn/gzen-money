@@ -12163,12 +12163,21 @@ if test -n "$GZEN_MONEY_CFLAGS"; then
     pkg_cv_GZEN_MONEY_CFLAGS="$GZEN_MONEY_CFLAGS"
  elif test -n "$PKG_CONFIG"; then
     if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"gtk+-3.0 libsoup-2.4 gee-1.0 gtk+-3.0 json-glib-1.0\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "gtk+-3.0 libsoup-2.4 gee-1.0 gtk+-3.0 json-glib-1.0") 2>&5
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"gnome-keyring-1
+gio-2.0
+gio-2.0
+gtk+-3.0 libsoup-2.4 gee-1.0 gtk+-3.0 json-glib-1.0\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "gnome-keyring-1
+gio-2.0
+gio-2.0
+gtk+-3.0 libsoup-2.4 gee-1.0 gtk+-3.0 json-glib-1.0") 2>&5
   ac_status=$?
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
-  pkg_cv_GZEN_MONEY_CFLAGS=`$PKG_CONFIG --cflags "gtk+-3.0 libsoup-2.4 gee-1.0 gtk+-3.0 json-glib-1.0" 2>/dev/null`
+  pkg_cv_GZEN_MONEY_CFLAGS=`$PKG_CONFIG --cflags "gnome-keyring-1
+gio-2.0
+gio-2.0
+gtk+-3.0 libsoup-2.4 gee-1.0 gtk+-3.0 json-glib-1.0" 2>/dev/null`
 		      test "x$?" != "x0" && pkg_failed=yes 
 else
   pkg_failed=yes
@@ -12180,12 +12189,21 @@ if test -n "$GZEN_MONEY_LIBS"; then
     pkg_cv_GZEN_MONEY_LIBS="$GZEN_MONEY_LIBS"
  elif test -n "$PKG_CONFIG"; then
     if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"gtk+-3.0 libsoup-2.4 gee-1.0 gtk+-3.0 json-glib-1.0\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "gtk+-3.0 libsoup-2.4 gee-1.0 gtk+-3.0 json-glib-1.0") 2>&5
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"gnome-keyring-1
+gio-2.0
+gio-2.0
+gtk+-3.0 libsoup-2.4 gee-1.0 gtk+-3.0 json-glib-1.0\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "gnome-keyring-1
+gio-2.0
+gio-2.0
+gtk+-3.0 libsoup-2.4 gee-1.0 gtk+-3.0 json-glib-1.0") 2>&5
   ac_status=$?
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
-  pkg_cv_GZEN_MONEY_LIBS=`$PKG_CONFIG --libs "gtk+-3.0 libsoup-2.4 gee-1.0 gtk+-3.0 json-glib-1.0" 2>/dev/null`
+  pkg_cv_GZEN_MONEY_LIBS=`$PKG_CONFIG --libs "gnome-keyring-1
+gio-2.0
+gio-2.0
+gtk+-3.0 libsoup-2.4 gee-1.0 gtk+-3.0 json-glib-1.0" 2>/dev/null`
 		      test "x$?" != "x0" && pkg_failed=yes 
 else
   pkg_failed=yes
@@ -12206,14 +12224,23 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        GZEN_MONEY_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "gtk+-3.0 libsoup-2.4 gee-1.0 gtk+-3.0 json-glib-1.0" 2>&1`
+	        GZEN_MONEY_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "gnome-keyring-1
+gio-2.0
+gio-2.0
+gtk+-3.0 libsoup-2.4 gee-1.0 gtk+-3.0 json-glib-1.0" 2>&1`
         else 
-	        GZEN_MONEY_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "gtk+-3.0 libsoup-2.4 gee-1.0 gtk+-3.0 json-glib-1.0" 2>&1`
+	        GZEN_MONEY_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "gnome-keyring-1
+gio-2.0
+gio-2.0
+gtk+-3.0 libsoup-2.4 gee-1.0 gtk+-3.0 json-glib-1.0" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$GZEN_MONEY_PKG_ERRORS" >&5
 
-	as_fn_error $? "Package requirements (gtk+-3.0 libsoup-2.4 gee-1.0 gtk+-3.0 json-glib-1.0) were not met:
+	as_fn_error $? "Package requirements (gnome-keyring-1
+gio-2.0
+gio-2.0
+gtk+-3.0 libsoup-2.4 gee-1.0 gtk+-3.0 json-glib-1.0) were not met:
 
 $GZEN_MONEY_PKG_ERRORS
 

@@ -25,7 +25,7 @@ gzen_money_SOURCES = \
 	gzen_money.vala config.vapi oauth.vala oauth-zenmoney.vala zenmoney.vala dbus_server.vala
 
 gzen_money_VALAFLAGS =  --pkg libsoup-2.4 --pkg gee-1.0 --pkg gtk+-3.0 --pkg json-glib-1.0  \
-	--pkg gtk+-3.0 --pkg gnome-keyring-1
+	--pkg gtk+-3.0 --gnome-keyring-1
 
 
 gzen_money_LDFLAGS = \

@@ -589,7 +589,22 @@ gzen_money.o: gzen_money.c /usr/include/stdc-predef.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvscale.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvscrollbar.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvseparator.h \
- /usr/include/gtk-3.0/gtk/gtk-autocleanups.h
+ /usr/include/gtk-3.0/gtk/gtk-autocleanups.h /usr/include/gee-1.0/gee.h \
+ /usr/include/gnome-keyring-1/gnome-keyring.h \
+ /usr/include/gnome-keyring-1/gnome-keyring-result.h \
+ /usr/include/json-glib-1.0/json-glib/json-glib.h \
+ /usr/include/json-glib-1.0/json-glib/json-types.h \
+ /usr/include/json-glib-1.0/json-glib/json-version-macros.h \
+ /usr/include/json-glib-1.0/json-glib/json-version.h \
+ /usr/include/json-glib-1.0/json-glib/json-builder.h \
+ /usr/include/json-glib-1.0/json-glib/json-generator.h \
+ /usr/include/json-glib-1.0/json-glib/json-parser.h \
+ /usr/include/json-glib-1.0/json-glib/json-path.h \
+ /usr/include/json-glib-1.0/json-glib/json-reader.h \
+ /usr/include/json-glib-1.0/json-glib/json-version.h \
+ /usr/include/json-glib-1.0/json-glib/json-enum-types.h \
+ /usr/include/json-glib-1.0/json-glib/json-gobject.h \
+ /usr/include/json-glib-1.0/json-glib/json-gvariant.h
 
 /usr/include/stdc-predef.h:
 
@@ -1914,3 +1929,35 @@ gzen_money.o: gzen_money.c /usr/include/stdc-predef.h \
 /usr/include/gtk-3.0/gtk/deprecated/gtkvseparator.h:
 
 /usr/include/gtk-3.0/gtk/gtk-autocleanups.h:
+
+/usr/include/gee-1.0/gee.h:
+
+/usr/include/gnome-keyring-1/gnome-keyring.h:
+
+/usr/include/gnome-keyring-1/gnome-keyring-result.h:
+
+/usr/include/json-glib-1.0/json-glib/json-glib.h:
+
+/usr/include/json-glib-1.0/json-glib/json-types.h:
+
+/usr/include/json-glib-1.0/json-glib/json-version-macros.h:
+
+/usr/include/json-glib-1.0/json-glib/json-version.h:
+
+/usr/include/json-glib-1.0/json-glib/json-builder.h:
+
+/usr/include/json-glib-1.0/json-glib/json-generator.h:
+
+/usr/include/json-glib-1.0/json-glib/json-parser.h:
+
+/usr/include/json-glib-1.0/json-glib/json-path.h:
+
+/usr/include/json-glib-1.0/json-glib/json-reader.h:
+
+/usr/include/json-glib-1.0/json-glib/json-version.h:
+
+/usr/include/json-glib-1.0/json-glib/json-enum-types.h:
+
+/usr/include/json-glib-1.0/json-glib/json-gobject.h:
+
+/usr/include/json-glib-1.0/json-glib/json-gvariant.h:

@@ -141,7 +141,6 @@ public class Main : Object
 		
 		string secret = "";
 		foreach (GnomeKeyring.Found Item in search_result) {
-			secret = Item.secret; 
 			message(Item.secret);					 
 			message(((uint)Item.item_id).to_string());
 		}

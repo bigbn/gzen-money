@@ -102,7 +102,9 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(uidir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_gzen_money_OBJECTS = gzen_money.$(OBJEXT)
+am_gzen_money_OBJECTS = gzen_money.$(OBJEXT) oauth.$(OBJEXT) \
+	oauth-zenmoney.$(OBJEXT) zenmoney.$(OBJEXT) \
+	dbus_server.$(OBJEXT)
 gzen_money_OBJECTS = $(am_gzen_money_OBJECTS)
 am__DEPENDENCIES_1 =
 gzen_money_DEPENDENCIES = $(am__DEPENDENCIES_1)
@@ -211,7 +213,7 @@ ETAGS = etags
 CTAGS = ctags
 am__DIST_COMMON = $(srcdir)/Makefile.in \
 	$(srcdir)/gzen_money_vala.stamp $(top_srcdir)/depcomp \
-	gzen_money.c
+	dbus_server.c gzen_money.c oauth-zenmoney.c oauth.c zenmoney.c
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = ${SHELL} /home/bigbn/Devel/gzen-money/missing aclocal-1.15
 AMTAR = $${TAR-tar}
@@ -239,8 +241,8 @@ EGREP = /usr/bin/grep -E
 EXEEXT = 
 FGREP = /usr/bin/grep -F
 GREP = /usr/bin/grep
-GZEN_MONEY_CFLAGS = -pthread -I/usr/include/libsoup-2.4 -I/usr/include/libxml2 -I/usr/include/gee-1.0 -I/usr/include/gtk-3.0 -I/usr/include/at-spi2-atk/2.0 -I/usr/include/at-spi-2.0 -I/usr/include/dbus-1.0 -I/usr/lib/dbus-1.0/include -I/usr/include/gtk-3.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/cairo -I/usr/include/pango-1.0 -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng16 -I/usr/include/harfbuzz -I/usr/include/freetype2 -I/usr/include/harfbuzz -I/usr/include/libdrm -I/usr/include/libpng16 -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/libpng16 -I/usr/include/json-glib-1.0 -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include 
-GZEN_MONEY_LIBS = -lsoup-2.4 -lgee -lgtk-3 -lgdk-3 -lpangocairo-1.0 -lpango-1.0 -latk-1.0 -lcairo-gobject -lcairo -lgdk_pixbuf-2.0 -ljson-glib-1.0 -lgio-2.0 -lgobject-2.0 -lglib-2.0 
+GZEN_MONEY_CFLAGS = -pthread -I/usr/include/gnome-keyring-1 -I/usr/include/libsoup-2.4 -I/usr/include/libxml2 -I/usr/include/gee-1.0 -I/usr/include/gtk-3.0 -I/usr/include/at-spi2-atk/2.0 -I/usr/include/at-spi-2.0 -I/usr/include/dbus-1.0 -I/usr/lib/dbus-1.0/include -I/usr/include/gtk-3.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/cairo -I/usr/include/pango-1.0 -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng16 -I/usr/include/harfbuzz -I/usr/include/freetype2 -I/usr/include/harfbuzz -I/usr/include/libdrm -I/usr/include/libpng16 -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/libpng16 -I/usr/include/json-glib-1.0 -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include 
+GZEN_MONEY_LIBS = -lgnome-keyring -lsoup-2.4 -lgee -lgtk-3 -lgdk-3 -lpangocairo-1.0 -lpango-1.0 -latk-1.0 -lcairo-gobject -lcairo -lgdk_pixbuf-2.0 -ljson-glib-1.0 -lgio-2.0 -lgobject-2.0 -lglib-2.0 
 INSTALL = /usr/bin/install -c
 INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_PROGRAM = ${INSTALL}
@@ -338,7 +340,9 @@ uidir = $(pkgdatadir)/ui
 ui_DATA = gzen_money.ui
 AM_CPPFLAGS = \
 	-DPACKAGE_LOCALE_DIR=\""$(localedir)"\" \
-	-DPACKAGE_SRC_DIR=\""$(srcdir)"\" \
+	-DPACKAGE_SRC_DIR=\""$(srcdir). \
+	$(GIO_CFLAGS). \
+	$(GIO_CFLAGS)"\" \
 	-DPACKAGE_DATA_DIR=\""$(pkgdatadir)"\" \
 	$(GZEN_MONEY_CFLAGS)
 
@@ -347,15 +351,17 @@ AM_CFLAGS = \
 	 -g
 
 gzen_money_SOURCES = \
-	gzen_money.vala config.vapi
+	gzen_money.vala config.vapi oauth.vala oauth-zenmoney.vala zenmoney.vala dbus_server.vala
 
 gzen_money_VALAFLAGS = --pkg libsoup-2.4 --pkg gee-1.0 --pkg gtk+-3.0 --pkg json-glib-1.0  \
-	--pkg gtk+-3.0
+	--pkg gtk+-3.0 --pkg gnome-keyring-1
 
 gzen_money_LDFLAGS = \
 	-Wl,--export-dynamic
 
-gzen_money_LDADD = $(GZEN_MONEY_LIBS)
+gzen_money_LDADD = $(GZEN_MONEY_LIBS) \
+	$(GIO_LIBS)
+
 EXTRA_DIST = $(ui_DATA)
 all: all-am
 
@@ -450,7 +456,11 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+include ./$(DEPDIR)/dbus_server.Po
 include ./$(DEPDIR)/gzen_money.Po
+include ./$(DEPDIR)/oauth-zenmoney.Po
+include ./$(DEPDIR)/oauth.Po
+include ./$(DEPDIR)/zenmoney.Po
 
 .c.o:
 	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -477,9 +487,29 @@ $(srcdir)/gzen_money.c: $(srcdir)/gzen_money_vala.stamp
 	@if test -f $@; then :; else \
 	  $(MAKE) $(AM_MAKEFLAGS) $(srcdir)/gzen_money_vala.stamp; \
 	fi
-$(srcdir)/gzen_money_vala.stamp: gzen_money.vala config.vapi
+$(srcdir)/oauth.c: $(srcdir)/gzen_money_vala.stamp
+	@if test -f $@; then :; else rm -f $(srcdir)/gzen_money_vala.stamp; fi
+	@if test -f $@; then :; else \
+	  $(MAKE) $(AM_MAKEFLAGS) $(srcdir)/gzen_money_vala.stamp; \
+	fi
+$(srcdir)/oauth-zenmoney.c: $(srcdir)/gzen_money_vala.stamp
+	@if test -f $@; then :; else rm -f $(srcdir)/gzen_money_vala.stamp; fi
+	@if test -f $@; then :; else \
+	  $(MAKE) $(AM_MAKEFLAGS) $(srcdir)/gzen_money_vala.stamp; \
+	fi
+$(srcdir)/zenmoney.c: $(srcdir)/gzen_money_vala.stamp
+	@if test -f $@; then :; else rm -f $(srcdir)/gzen_money_vala.stamp; fi
+	@if test -f $@; then :; else \
+	  $(MAKE) $(AM_MAKEFLAGS) $(srcdir)/gzen_money_vala.stamp; \
+	fi
+$(srcdir)/dbus_server.c: $(srcdir)/gzen_money_vala.stamp
+	@if test -f $@; then :; else rm -f $(srcdir)/gzen_money_vala.stamp; fi
+	@if test -f $@; then :; else \
+	  $(MAKE) $(AM_MAKEFLAGS) $(srcdir)/gzen_money_vala.stamp; \
+	fi
+$(srcdir)/gzen_money_vala.stamp: gzen_money.vala config.vapi oauth.vala oauth-zenmoney.vala zenmoney.vala dbus_server.vala
 	$(AM_V_at)rm -f $@ && echo stamp > $@-t
-	$(AM_V_VALAC)$(am__cd) $(srcdir) && $(VALAC) $(gzen_money_VALAFLAGS) $(VALAFLAGS) -C gzen_money.vala config.vapi
+	$(AM_V_VALAC)$(am__cd) $(srcdir) && $(VALAC) $(gzen_money_VALAFLAGS) $(VALAFLAGS) -C gzen_money.vala config.vapi oauth.vala oauth-zenmoney.vala zenmoney.vala dbus_server.vala
 	$(AM_V_at)mv -f $@-t $@
 
 mostlyclean-libtool:
@@ -628,9 +658,17 @@ distclean-generic:
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
 	@echo "it deletes files that may require special tools to rebuild."
+	-rm -f $(srcdir)/dbus_server.c
 	-rm -f $(srcdir)/gzen_money.c
 	-rm -f $(srcdir)/gzen_money_vala.stamp
+	-rm -f $(srcdir)/oauth-zenmoney.c
+	-rm -f $(srcdir)/oauth.c
+	-rm -f $(srcdir)/zenmoney.c
+	-rm -f dbus_server.c
 	-rm -f gzen_money.c
+	-rm -f oauth-zenmoney.c
+	-rm -f oauth.c
+	-rm -f zenmoney.c
 clean: clean-am
 
 clean-am: clean-binPROGRAMS clean-generic clean-libtool mostlyclean-am
