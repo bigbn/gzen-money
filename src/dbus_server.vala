@@ -1,40 +1,39 @@
-/* Note: this attribute specifies the _interface_ name.  It
- * is called 'name =' for historical reasons.
+/*
+ * dbus_server.c
+ * Copyright (C) 2015 Pavel Shabardin <bigbn@mail.ru>
+ *
+ * gzen-money is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the
+ * Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * gzen-money is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+/**
+* D-Bus interface for external communications.
+* @class DbusServer
+* @property onMessage {signal} emits, when any new D-Bus messages are received.
+*/
 [DBus (name = "org.gzen_money.Demo")]
 public class DbusServer : Object {
-	public signal void onMessage(string verify);
-    private int counter;
 
-    public int ping (string msg) {
-        stdout.printf ("%s\n", msg);
-		this.onMessage(msg);
-        return counter++;
-    }
+	public signal void on_consumer_key_received(string verify);
 
-    public int ping_with_signal (string msg) {
-        stdout.printf ("%s\n", msg);
-        pong(counter, msg);
-        return counter++;
-    }
-
-    /* Including any parameter of type GLib.BusName won't be added to the
-       interface and will return the dbus sender name (who is calling the method) */
-    public int ping_with_sender (string msg, GLib.BusName sender) {
-        stdout.printf ("%s, from: %s\n", msg, sender);
-        return counter++;
-    }
-
-    public void ping_error () throws Error {
-        throw new DemoError.SOME_ERROR ("There was an error!");
-    }
-
-    public signal void pong (int count, string msg);
-}
-
-[DBus (name = "org.gzen_money.DemoError")]
-public errordomain DemoError
-{
-    SOME_ERROR
+  /**
+  * Receives oauth secret and pass it to application via signal.
+  * @method set_consumer_key
+  * @param {string} key
+  * @emits DbusServer#on_consumer_key_received
+  */
+  public void set_consumer_key(string key) {
+    this.on_consumer_key_received(key);
+  }
 }
 

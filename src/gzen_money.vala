@@ -1,4 +1,3 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 4; tab-width: 4 -*-  */
 /*
  * main.c
  * Copyright (C) 2015 Pavel Shabardin <bigbn@mail.ru>
@@ -59,7 +58,7 @@ public class Main : Object
 		
 		try 
 		{
-			var builder = new Builder ();
+			var builder = new Builder();
 			builder.add_from_file (UI_FILE);
 
 			builder.connect_signals (this);
@@ -107,7 +106,7 @@ public class Main : Object
 		try {			
 			this.dbus_server = new DbusServer();
 		    conn.register_object ("/org/gzen_money/demo", this.dbus_server);
-			this.dbus_server.onMessage.connect(this.onMessageHandler);
+			this.dbus_server.on_consumer_key_received.connect(this.onMessageHandler);
 		} catch (IOError e) {
 		    stderr.printf ("Could not register service\n");
 		}
